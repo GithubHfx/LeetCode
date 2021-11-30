@@ -1,3 +1,15 @@
+```
+### <span id=""></span>
+#### 题目描述
+#### 解题思路
+#### 解题代码
+#### 提交记录
+
+**[](#)**
+```
+
+
+
 ## 一、刷题时间表
 
 * ***[2021.10.27-difficult:301.移除无效的括号](#301)**
@@ -30,7 +42,13 @@
 * **[2021.11.23-easy: 859.BuddyStrings](#859)**
 * **[2021.11.24-mid:423.reconstruct-original-digits-from-english](#423)**
 * **[2021.11.25-difficult:458.PoorPig](#458)**
-* **[2021.11.26-mid:519.RandomFlipMatrix](#519)**
+* **[2021.11.26-easy:700.二叉搜索树中的搜索](#700)**
+* **[2021.11.27-mid:519.RandomFlipMatrix](#519)**
+* **[2021.11.27-easy:455.饼干分发](#455)**
+* **[2021.11.27-easy:1005.K次取反后最大数组和](#1005)**
+* **[2021.11.27-easy:860.柠檬水找零](#860)**
+* **[2021.11.28-mid:438.找到字符串中所有字母的异位词](#438)**
+* **[2021.11.30-mid:400.第N个数字](#400)**
 
 ## 二、刷题 分类表
 
@@ -134,11 +152,13 @@ graph LR
 | 2021.11.27 | 1005.k次取反后最大化的数组和 | easy | [go](#1005) | [1005.K次取反后最大化的数组和](https://leetcode-cn.com/problems/maximize-sum-of-array-after-k-negations) |
 | 2021.11.27 | 860.柠檬水找零               | easy | [go](#860)  | [860.柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/) |
 
-
-
 #### 1.2. 双指针
 
 ##### 1.2.1.双指针和滑动窗口
+
+| 刷题时间   | 题目                                 | 难度 | 思路       | 链接                                                         |
+| ---------- | ------------------------------------ | ---- | ---------- | ------------------------------------------------------------ |
+| 2021.11.28 | 438.找到字符串中那个所有字母的异位词 | easy | [go](#455) | [438. 找到字符串中所有字母异位词](https://leetcode-cn.com/problems/assign-cookies/) |
 
 ##### 1.2.2.快慢指针
 
@@ -1205,6 +1225,8 @@ class Solution {
 
 ![image-20211112090428914](LeetCode-CookBook(Implement By Java).assets/image-20211112090428914.png)
 
+
+
 ### <span id="384">384.ShuffleAnArray</span>
 
 #### 题目描述
@@ -1599,6 +1621,71 @@ class Solution {
 
 ![image-20211119081359228](LeetCode-CookBook(Implement By Java).assets/image-20211119081359228.png)
 
+### <span id="400">400.第N个数字</span>
+
+#### 题目描述
+
+给你一个整数 n ，请你在无限的整数序列 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...] 中找出并返回第 n 位上的数字。
+
+ 
+
+示例 1：
+
+输入：n = 3
+输出：3
+示例 2：
+
+输入：n = 11
+输出：0
+解释：第 11 位数字在序列 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... 里是 0 ，它是 10 的一部分。
+
+**提示：**
+
+$1 <= n <= 2^{31} - 1$
+第 n 位上的数字是按计数单位（digit）从前往后数的第 n 个数，参见 示例 2 。
+
+#### 解题思路
+
+我们要知道第n位是什么，其实就是要找它属于几位数，它在那位数里是第多少个数，以及最终要找是该位数的第几位。
+我们依次排去一位数（9个），两位数（180个），三位数（2700个），
+假如n是200，那么我们就知道它一定是三位数，且它是三位数里的第200-9-180=11200−9−180=11位，转换成从0开始的坐标就是11-1=1011−1=10，
+三位数是每三位一个数，那么它就是三位数里的\frac{10}{3}=3 
+3
+10
+
+ =3，也就是103103了。而我们要找该数里的10\%3=110%3=1位也就是00。
+
+#### 解题代码
+
+```
+//package cn.edu.csust.leetcode;
+//// 比较有意思，这个提的思路大致都懂，但是需要做到时间最优需要技巧，例如剪枝
+//class Solution {
+//    public int findNthDigit(int n) {
+//        long k = n;
+//        for (int i = 1; ; i++) {
+//            if (i * Math.pow(10, i) > k) {
+//                return Long.toString((int) (k / i)).charAt((int) (k % i)) - '0';
+//            }
+//            k += Math.pow(10, i);
+//        }
+//    }
+//}
+//public class KthDigit {
+//    public static void main(String[] args) {
+//        Solution solution = new Solution();
+//        System.out.println(solution.findNthDigit(50));
+//    }
+//}
+
+```
+
+
+
+#### 提交记录
+
+![image-20211130223415954](LeetCode-CookBook(Implement By Java).assets/image-20211130223415954.png)
+
 ### <span id="407">407.接雨水2(difficult)</span>
 
 #### 题目描述
@@ -1870,6 +1957,99 @@ class Solution{
 #### 题解
 
 ![image-20211124090733457](LeetCode-CookBook(Implement By Java).assets/image-20211124090733457.png)
+
+### <span id="438">438.找到所有字母的异位词</span>
+
+#### 题目描述
+
+给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。
+
+异位词 指由相同字母重排列形成的字符串（包括相同的字符串）。
+
+ ```
+ 示例 1:
+ 
+ 输入: s = "cbaebabacd", p = "abc"
+ 输出: [0,6]
+ 解释:
+ 起始索引等于 0 的子串是 "cba", 它是 "abc" 的异位词。
+ 起始索引等于 6 的子串是 "bac", 它是 "abc" 的异位词。
+  示例 2:
+ 
+ 输入: s = "abab", p = "ab"
+ 输出: [0,1,2]
+ 解释:
+ 起始索引等于 0 的子串是 "ab", 它是 "ab" 的异位词。
+ 起始索引等于 1 的子串是 "ba", 它是 "ab" 的异位词。
+ 起始索引等于 2 的子串是 "ab", 它是 "ab" 的异位词。
+ ```
+
+**提示:**
+
+$1 <= s.length, p.length <= 3 * 10^4$
+s 和 p 仅包含小写字母
+
+#### 解题思路
+
+滑动窗口
+
+1.判断p和s长度如果len(p)>len(s)直接返回空列表
+
+2.记录p的字符串字母频率
+
+3.从left -left+len(p)记录s字符串的字母频率，判断是否与mapP相同，如果相同添加left坐标
+
+left从0--len(s) - len(p)
+
+#### 解题代码
+
+```java
+package cn.edu.csust.leetcode.algorithm.BiPointer;
+
+import java.util.*;
+
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        int [] mapS = new int[26];
+        int [] mapP = new int[26];
+        int left = 0;
+        int right = p.length();
+        List<Integer> list = new ArrayList<>();
+        if(p.length() > s.length()){
+            return list;
+        }
+        for (int i = 0; i < p.length(); i++) {
+            mapS[s.charAt(i) - 'a']++;
+            mapP[p.charAt(i) - 'a']++;
+        }
+
+        if(Arrays.equals(mapP, mapS)){
+            list.add(left);
+        }
+        while(right < s.length()){
+            mapS[s.charAt(left++)-'a']--;
+            mapS[s.charAt(right++)-'a']++;
+            if(Arrays.equals(mapP, mapS)){
+                list.add(left);
+            }
+        }
+         return list;
+    }
+}
+public class FindAllAnagramsInAString {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.findAnagrams("cbaebabacd", "abc"));
+    }
+}
+
+```
+
+
+
+#### 提交记录
+
+![image-20211128101731653](E:\LeetCode\LeetCode-CookBook(Implement By Java).assets\image-20211128101731653.png)
 
 ### <span id="455">455.分发饼干</span>
 
@@ -3255,6 +3435,72 @@ public class MapSumPairs {
 
 
 ![image-20211114095145496](LeetCode-CookBook(Implement By Java).assets/image-20211114095145496.png)
+
+### <span id="700">700.二叉搜索树种的搜索</span>
+#### 题目描述
+
+给定二叉搜索树（BST）的根节点和一个值。 你需要在BST中找到节点值等于给定值的节点。 返回以该节点为根的子树。 如果节点不存在，则返回 NULL。
+
+例如，
+
+给定二叉搜索树:
+
+        4
+       / \
+      2   7
+     / \
+    1   3
+
+和值: 2
+你应该返回如下子树:
+
+      2     
+     / \   
+    1   3
+在上述示例中，如果要找的值是 5，但因为没有节点值为 5，我们应该返回 NULL。
+
+#### 解题思路
+
+深度优先遍历
+
+#### 解题代码
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        if(root == null){
+            return null;
+        }
+        if(root.val == val){
+            return root;
+        }
+        TreeNode ansLeft = searchBST(root.left, val);
+        if(ansLeft != null)
+            return ansLeft;
+        return searchBST(root.right, val);
+    }
+}
+```
+
+
+
+#### 提交记录
+
+![image-20211128102201809](E:\LeetCode\LeetCode-CookBook(Implement By Java).assets\image-20211128102201809.png)
 
 ### <span id="859">859.亲密字符串</span>
 

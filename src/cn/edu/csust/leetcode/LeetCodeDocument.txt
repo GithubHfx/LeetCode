@@ -167,7 +167,13 @@
 2021.11.25(difficult):
     458.PoorPig
 2021.11.26:
+    (easy)700.BinarySearchTree
+2021.11.27:
     (mid)519.RandomFlipMatrix
     (easy)455.AssignCookies
     (easy)1005.MaximizeSumOfArrayAfterKNegations
-
+    (easy)860.LemonadeChange
+2021.11.28:
+    (mid)438.find-all-anagrams-in-a-string
+2021.11.30:
+    (mid)400.Nth-Digit
