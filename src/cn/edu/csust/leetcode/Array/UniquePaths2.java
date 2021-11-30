@@ -1,0 +1,73 @@
+//package cn.edu.csust.leetcode.Array;
+////// 绕过障碍物
+////class Solution{
+////    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+////        int m = obstacleGrid.length;
+////        int n = obstacleGrid[0].length;
+////        int [][] dp = new int[m][n];
+////        for (int i = 0; i < m; i++) {
+////            if(obstacleGrid[i][0] == 1)
+////            {
+////                break;
+////            }
+////            dp[i][0] = 1;
+////        }
+////        for (int i = 0; i < n; i++) {
+////            if(obstacleGrid[0][i] == 1)
+////            {
+////                break;
+////            }
+////            dp[0][i] = 1;
+////        }
+////        for (int i = 1; i < m; i++) {
+////            for (int j = 1; j < n; j++) {
+////                if (obstacleGrid[i][j] != 1){
+////                    if(obstacleGrid[i - 1][j] != 1){
+////                        dp[i][j] += dp[i - 1][j];
+////                    }
+////
+////                    if(obstacleGrid[i][j - 1] != 1){
+////                        dp[i][j] += dp[i][j - 1];
+////                    }
+////                }
+////            }
+////        }
+////        return dp[m - 1][n-1];
+////    }
+////}
+//
+//// 一维和二维数组的时空差不多，所以哪种更好理解就用哪种方式
+//class Solution{
+//    public int uniquePathsWithObstacles(int [][] obstacleGrid){
+//        int m = obstacleGrid.length;
+//        int n = obstacleGrid[0].length;
+//        int []dp = new int[n];
+//        for (int i = 0; i < n; i++) {
+//            if(obstacleGrid[0][i] == 1){
+//                break;
+//            }
+//            dp[i] = 1;
+//        }
+//        for (int i = 1; i < m; i++) {
+//            for (int j = 0; j < n; j++) {
+//                if(obstacleGrid[i][j] == 1) {
+//                    dp[j] = 0;
+//                }
+//
+//                else if (j > 0){
+//                    dp[j] += dp[j - 1];
+//                }
+//            }
+//        }
+//        return dp[n - 1];
+//    }
+//}
+//public class UniquePaths2 {
+//    public static void main(String[] args) {
+//        Solution solution = new Solution();
+//        System.out.println(solution.uniquePathsWithObstacles(new int[][]{{0, 0, 0},
+//                {0, 1, 0},
+//                {0, 0, 0}}));
+//        System.out.println(solution.uniquePathsWithObstacles(new int[][]{{0}, {1}}));
+//    }
+//}

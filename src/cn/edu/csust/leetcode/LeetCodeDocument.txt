@@ -1,0 +1,173 @@
+2021.09.26(mid):
+    1.TwoNumSum
+    2.AddTwoLinkedNum
+2021.09.27(mid):
+    3.Longest Substring Without Repeating Character
+    4.MedianOfTwoSortedArrays
+2021.09.28(easy):
+    7.Reverse Integer
+    9.Palindrome Number
+2021.09.29(mid):
+    11.Container With Most Water
+    13.Roman to Integer
+2021.09.30(mid):
+    15.3Sum
+2021.10.1(mid):
+    16.3SumClosest
+2021.10.2(mid):
+    17.LetterCombinationOfAPhoneNumber
+    18.FourSum01(4Sum)
+2021.10.3(easy):
+    19.RemoveNNodeFromEndOfList
+    20.ValidParentheses
+2021.10.4(mid):
+    21.Merge Two Sorted List
+    22.Generates Parentheses
+        backtrack, left first
+2021.10.5(mid):
+    24.SwapNodesInPairs
+    25.ReverseNodesInKGroup
+2021.10.6(mid):
+    26.RemoveDuplicateElementsFromList
+    27.RemoveTargetElement
+2021.10.7(mid):
+    *28.StrStr
+2021.10.14(mid、hard):
+    *29.DivideTwoIntegers
+    *30.SubstringWithConcatenationOfAllWords
+2021.10.16(mid):
+    33.SearchInRotatedArray
+    34.find-first-and-last-position-of-element-in-sorted-array
+2021.10.17(mid):
+    35.SearchIndexPosition
+    36.ValidSudoku
+2021.10.18(mid):
+    37.SudokuSolver
+2021.10.21(mid):
+    39.CombinationSum
+    40.CombinationSum2
+2021.10.22(difficult):
+    41.firstMissingPositive
+2021.10.23(mid):
+    42.TrappingRainWater
+    48.RotateImage
+2021.10.25(easy):
+    53.MaxmumSubArray
+    54.SpiralMatrix1
+    59.SpiralMatrix2
+2021.10.26(mid):
+    496.NextGreaterNum
+2021.10.27(difficult):
+    301.RemoveInvalidParentheses
+    45.JumpGame2
+    55.JumpGame1
+    56.MergeIntervals
+2021.10.28(mid):
+    869.ReorderedPowerOf2
+2021.10.29(difficult):
+    * 335.SelfCross
+        4 types of cross
+2021.10.30(middle):
+    260.SingleNum2
+2021.10.31(middle):
+    500.KeyboardRow:
+        easy
+    57.InsertInterval:
+        The same as merge intervals in somewhere
+    62.UniquePaths:
+        Choose m - 1 from (m + n - 2)
+2021.11.1(easy):
+    575.distribute-candidates
+        Math.min(candyTypes.length >> 1,set().size())
+    63.UniquePaths
+        avoid obstacles
+2021.11.2(easy):
+    237.DeleteNode:
+        You are supposed to delete the node of a list while you are not able to get the head node.You can only get a
+        node that you are going to delete.The node are guaranteed not to be the last one
+        glues:
+            replace current value with next node's value and then delete the tail one, you will complete the exercise.
+    64.minPathsSum:
+        judge the answer in origin matrix, and select the minimum path sums
+2021.11.3(difficult):
+    407.trapping-rain-water3:
+        Transform 2D data thought to 3D, and a heap-based data structure is employed in this practice
+2021.11.4(easy):
+    367.ValidPerfectSquare:
+        1.linear search
+        2.binary search
+    75.SortColors:
+            Quick sort: split matrix into 2 group via a neutral num.
+            The neutral number can best be the last element of the matrix
+    78.Subsets:
+            tree-based backtracking
+            n choose k equals ( n - 1 choose k + n - 1 choose k - 1)
+2021.11.5(mid):
+    1218.LongestArithmeticSubsequenceOfGivenDifference:
+        calculate the length of each arithmetic subsequence, document the longest sequence length by employing the hashmap data structure
+
+    79.WordSearch:
+        Search a specified word in a m * n grid,
+        BFS or DFS
+2021.11.6(easy):
+    268.MissingNumber:
+        1.hash table
+        2.create a space of length n,and search the missing one between 0 and n
+        3.⊕
+    80.RemoveDuplicatesFromSortedArray2：
+        Employing a mutex variable which will boost the program efficiency
+    81.SearchInRotatedSortedArray2:
+        binary Search.Considering the duplicates elements ,You must adjust the boundary(both left and right) carefully
+
+2021.11.7(easy):
+    598.range-addition2:
+2021.11.8(mid):
+    299.BullsAndCows
+2021.11.9(difficult):
+    488.ZumaGame
+        DynamicProgramming
+2021.11.10(easy):
+    495.TeemoAttack
+2021.11.11(difficult):
+    629.KInversePairs
+2021.11.12(mid):
+    375.GuessNumberHigherOrLower2
+2021.11.13(easy):
+    520.DetectCapital
+    84.LargestRectangleInHistogram
+2021.11.14(mid):
+    677.MapSumPairs:
+        Constructing a prefix tree to memorize the path and key val, then calculate the weight by dfs or bfs
+    70.ClimbingStairs:
+        DynamimcProgramming for solving the
+                                            Climbing stairs:
+                                            rub
+                                            backpack
+                                            stock series problems
+2021.11.15(mid):
+    319.bulb-switcher
+2021.11.16(difficult):
+    391.PerfectRectangle
+2021.11.17(mid):
+    318.MaxmumProductOfWordLengths
+2021.11.18(easy):
+    563.BinaryTreeTilt
+2021.11.19(mid):
+    397.IntegerReplacement
+2021.11.20(easy):
+    594.LongestHarmoniousSequence
+2021.11.21(easy):
+    559.MaxmumDepthOfNAryTree](#559)
+2021.11.22(mid):
+    384.ShuffleAnArray
+2021.11.23(easy):
+    859.BuddyString
+2021.11.24(mid):
+    423.reconstruct-original-digits-from-english
+2021.11.25(difficult):
+    458.PoorPig
+2021.11.26:
+    (mid)519.RandomFlipMatrix
+    (easy)455.AssignCookies
+    (easy)1005.MaximizeSumOfArrayAfterKNegations
+
