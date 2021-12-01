@@ -48,7 +48,10 @@
 * **[2021.11.27-easy:1005.K次取反后最大数组和](#1005)**
 * **[2021.11.27-easy:860.柠檬水找零](#860)**
 * **[2021.11.28-mid:438.找到字符串中所有字母的异位词](#438)**
+* **[2021.11.28-mid:376.摆动子序列问题](#376)**
 * **[2021.11.30-mid:400.第N个数字](#400)**
+* **[2021.12.01-easy:1446.连续字符](#1446)**
+* **[2021.12.01-easy:738.单调递增的数字](#738)**
 
 ## 二、刷题 分类表
 
@@ -151,14 +154,17 @@ graph LR
 | 2021.11.27 | 455.分发饼干                 | easy | [go](#455)  | [455.分发饼干](https://leetcode-cn.com/problems/assign-cookies/) |
 | 2021.11.27 | 1005.k次取反后最大化的数组和 | easy | [go](#1005) | [1005.K次取反后最大化的数组和](https://leetcode-cn.com/problems/maximize-sum-of-array-after-k-negations) |
 | 2021.11.27 | 860.柠檬水找零               | easy | [go](#860)  | [860.柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/) |
+| 2021.11.28 | 376.摆动序列问题             | mid  | [go](#376)  | [376.摆动序列问题](https://leetcode-cn.com/problems/wiggle-subsequence) |
+| 2021.12.01 | 738.单调递增的数字           | mid  | [go](#768)  | [738.单调递增的数字](https://leetcode-cn.com/problems/monotone-increasing-digits) |
 
-#### 1.2. 双指针
+####  1.2. 双指针
 
 ##### 1.2.1.双指针和滑动窗口
 
-| 刷题时间   | 题目                                 | 难度 | 思路       | 链接                                                         |
-| ---------- | ------------------------------------ | ---- | ---------- | ------------------------------------------------------------ |
-| 2021.11.28 | 438.找到字符串中那个所有字母的异位词 | easy | [go](#455) | [438. 找到字符串中所有字母异位词](https://leetcode-cn.com/problems/assign-cookies/) |
+| 刷题时间   | 题目                                 | 难度 | 思路        | 链接                                                         |
+| ---------- | ------------------------------------ | ---- | ----------- | ------------------------------------------------------------ |
+| 2021.11.28 | 438.找到字符串中那个所有字母的异位词 | easy | [go](#455)  | [438. 找到字符串中所有字母异位词](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/) |
+| 2021.12.01 | 1446.连续字符                        | easy | [go](#1446) | [1446.连续字符](https://leetcode-cn.com/problems/consecutive-characters/) |
 
 ##### 1.2.2.快慢指针
 
@@ -1226,6 +1232,109 @@ class Solution {
 ![image-20211112090428914](LeetCode-CookBook(Implement By Java).assets/image-20211112090428914.png)
 
 
+
+### <span id="376">376.摆动的子序列</span>
+#### 题目描述
+
+如果连续数字之间的差严格地在正数和负数之间交替，则数字序列称为 摆动序列 。第一个差（如果存在的话）可能是正数或负数。仅有一个元素或者含两个不等元素的序列也视作摆动序列。
+
+例如， [1, 7, 4, 9, 2, 5] 是一个 摆动序列 ，因为差值 (6, -3, 5, -7, 3) 是正负交替出现的。
+
+相反，[1, 4, 7, 2, 5] 和 [1, 7, 4, 5, 5] 不是摆动序列，第一个序列是因为它的前两个差值都是正数，第二个序列是因为它的最后一个差值为零。
+子序列 可以通过从原始序列中删除一些（也可以不删除）元素来获得，剩下的元素保持其原始顺序。
+
+给你一个整数数组 nums ，返回 nums 中作为 摆动序列 的 最长子序列的长度 。
+
+**示例 1**
+
+ ```
+ 输入：nums = [1,7,4,9,2,5]
+ 输出：6
+ 解释：整个序列均为摆动序列，各元素之间的差值为 (6, -3, 5, -7, 3) 。
+ ```
+
+
+**示例 2：**
+
+```
+输入：nums = [1,17,5,10,13,15,10,5,16,8]
+输出：7
+解释：这个序列包含几个长度为 7 摆动序列。
+其中一个是 [1, 17, 10, 13, 10, 16, 8] ，各元素之间的差值为 (16, -7, 3, -3, 6, -8) 。
+```
+
+**示例 3：**
+
+```
+输入：nums = [1,2,3,4,5,6,7,8,9]
+输出：2
+```
+
+**提示：**
+
+$1 <= nums.length <= 1000$
+$0 <= nums[i] <= 1000$
+
+#### 解题思路
+
+直接遍历序列
+
+1.如果两数相同则跳过
+
+2.如果大于则记录flag为true，否则为false
+
+3.如果当前的flag是第一次摆动(即当前数字与前一个数字第一次不一样)，或者与前一个flag不同那么则count+1
+
+#### 解题代码
+
+```
+package cn.edu.csust.leetcode.algorithm.greedy;
+class Solution {
+    public int wiggleMaxLength(int[] nums) {
+        if(nums.length == 1){
+            return 1;
+        }
+        else if(nums.length == 2){
+            if(nums[1] != nums[0])
+                return 2;
+            else{
+                return 1;
+            }
+        }
+        int i = 1;
+        boolean bool_doc = true;
+        boolean first = true;
+        int count=1;
+
+        while(i < nums.length){
+            if(nums[i] == nums[i-1]){
+                i++;
+                continue;
+            }
+            boolean temp = bool_doc;
+            bool_doc = nums[i] - nums[i-1] > 0;
+            if(first || temp != bool_doc){
+                first = false;
+                count++;
+            }
+            i++;
+        }
+        return count;
+    }
+}
+public class WiggleSequence {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.wiggleMaxLength(new int[]{1, 7, 4, 9, 2, 5}));
+        System.out.println(solution.wiggleMaxLength(new int[]{1,17,5,10,13,15,10,5,16,8}));
+        System.out.println(solution.wiggleMaxLength(new int[]{1,2,3,4,5,6,7,8,9}));
+    }
+}
+```
+
+#### 提交记录
+
+![image-20211201085651378](LeetCode-CookBook(Implement By Java).assets/image-20211201085651378.png)
 
 ### <span id="384">384.ShuffleAnArray</span>
 
@@ -3500,7 +3609,52 @@ class Solution {
 
 #### 提交记录
 
-![image-20211128102201809](E:\LeetCode\LeetCode-CookBook(Implement By Java).assets\image-20211128102201809.png)
+![image-20211128102201809](LeetCode-CookBook(Implement By Java).assets\image-20211128102201809.png)
+
+
+
+### <span id="738">738.单调的数字</span>
+#### 题目描述
+
+给定一个非负整数 N，找出小于或等于 N 的最大的整数，同时这个整数需要满足其各个位数上的数字是单调递增。
+
+（当且仅当每个相邻位数上的数字 x 和 y 满足 x <= y 时，我们称这个整数是单调递增的。）
+
+```
+示例 1:
+输入: N = 10
+输出: 9
+
+示例 2:
+输入: N = 1234
+输出: 1234
+
+示例 3:
+输入: N = 332
+输出: 299
+```
+
+
+说明: N 是在 [0, 10^9] 范围内的一个整数。
+
+#### 解题思路
+
+遍历整个数字，
+
+从低位往高位取数字，
+
+每次取两位%100
+
+比较高位和低位n / 10 > n % 10
+
+发生高位大于低位的情况直接res = res / i * 10 -1;
+
+i是$10^{times}$, times是当前第几次进入循环
+
+#### 解题代码
+#### 提交记录
+
+![image-20211201094556200](LeetCode-CookBook(Implement By Java).assets/image-20211201094556200.png)
 
 ### <span id="859">859.亲密字符串</span>
 
@@ -4134,3 +4288,92 @@ public class LongestArithmeticSubsequenceOfGivenDifference {
 
 ![image-20211105095433934](LeetCode-CookBook(Implement By Java).assets/image-20211105095433934.png)
 
+### <span id="1446">1446.连续</span>字符
+#### 题目描述
+
+给你一个字符串 s ，字符串的「能量」定义为：只包含一种字符的最长非空子字符串的长度。
+
+请你返回字符串的能量。
+
+**示例 1：**
+
+```
+输入：s = "leetcode"
+输出：2
+解释：子字符串 "ee" 长度为 2 ，只包含字符 'e' 。
+```
+
+**示例 2：**
+
+```
+输入：s = "abbcccddddeeeeedcba"
+输出：5
+解释：子字符串 "eeeee" 长度为 5 ，只包含字符 'e' 。
+```
+
+**示例 3：**
+
+```
+输入：s = "triplepillooooow"
+输出：5
+```
+
+**示例 4：**
+
+```
+输入：s = "hooraaaaaaaaaaay"
+输出：11
+```
+
+**示例 5：**
+
+```
+输入：s = "tourist"
+输出：1
+```
+
+**提示：**
+
+$1 <= s.length <= 500$
+s 只包含小写英文字母。
+
+#### 解题思路
+
+就直接统计，快慢指针获取最长的连续字符长度
+
+#### 解题代码
+
+```java
+package cn.edu.csust.leetcode.algorithm.bipointer;
+class Solution {
+    public int maxPower(String s) {
+        int n = s.length();
+        int fast = 0;
+        int slow = 0;
+        int maxConsequetiveCount = 1;
+        while(fast < n){
+            slow = fast;
+            while(fast < n && s.charAt(slow) == s.charAt(fast)) fast++;
+            maxConsequetiveCount = Math.max(maxConsequetiveCount, fast - slow);
+        }
+        return maxConsequetiveCount;
+    }
+}
+public class ConsecutiveCharacter {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.maxPower("leetcode"));
+        System.out.println(solution.maxPower("abbcccddddeeeeedcba"));
+        System.out.println(solution.maxPower("triplepillooooow"));
+        System.out.println(solution.maxPower("hooraaaaaaaaaaay"));
+        System.out.println(solution.maxPower("tourist"));
+    }
+}
+
+```
+
+
+
+#### 提交记录
+
+![image-20211201084320163](LeetCode-CookBook(Implement By Java).assets/image-20211201084320163.png)

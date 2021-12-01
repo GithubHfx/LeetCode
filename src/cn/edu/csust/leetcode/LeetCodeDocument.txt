@@ -175,5 +175,9 @@
     (easy)860.LemonadeChange
 2021.11.28:
     (mid)438.find-all-anagrams-in-a-string
+    (mid)376.WiggleSequence
 2021.11.30:
     (mid)400.Nth-Digit
+2021.12.01:
+    (easy)1446.ConsecutiveCharacter
+    (mid)738.MonotoneIncreasingNumber
