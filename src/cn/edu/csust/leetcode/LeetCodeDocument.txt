@@ -181,3 +181,5 @@
 2021.12.01:
     (easy)1446.ConsecutiveCharacter
     (mid)738.MonotoneIncreasingNumber
+2021.12.02:
+    (easy)506.RelativeRanks

@@ -52,6 +52,7 @@
 * **[2021.11.30-mid:400.第N个数字](#400)**
 * **[2021.12.01-easy:1446.连续字符](#1446)**
 * **[2021.12.01-easy:738.单调递增的数字](#738)**
+* **[2021.12.02-easy:506.相对名次](#506)**
 
 ## 二、刷题 分类表
 
@@ -2597,6 +2598,196 @@ class Solution{
 }
 ```
 
+### <span id="506">506.相对名次</span>
+#### 题目描述
+
+给你一个长度为 n 的整数数组 score ，其中 score[i] 是第 i 位运动员在比赛中的得分。所有得分都 互不相同 。
+
+运动员将根据得分 决定名次 ，其中名次第 1 的运动员得分最高，名次第 2 的运动员得分第 2 高，依此类推。运动员的名次决定了他们的获奖情况：
+
+* 名次第 1 的运动员获金牌 "Gold Medal" 。
+* 名次第 2 的运动员获银牌 "Silver Medal" 。
+* 名次第 3 的运动员获铜牌 "Bronze Medal" 。
+* 从名次第 4 到第 n 的运动员，只能获得他们的名次编号（即，名次第 x 的运动员获得编号 "x"）。
+    使用长度为 n 的数组 answer 返回获奖，其中 answer[i] 是第 i 位运动员的获奖情况。
+
+ ```
+ 示例 1：
+ 
+ 输入：score = [5,4,3,2,1]
+ 输出：["Gold Medal","Silver Medal","Bronze Medal","4","5"]
+ 解释：名次为 [1st, 2nd, 3rd, 4th, 5th] 。
+ 
+ 示例 2：
+ 
+ 输入：score = [10,3,8,9,4]
+ 输出：["Gold Medal","5","Bronze Medal","Silver Medal","4"]
+ 解释：名次为 [1st, 5th, 3rd, 2nd, 4th] 。
+ 
+ 
+ ```
+
+**提示：**
+
+$n == score.length$
+$1 <= n <= 10^4$
+$0 <= score[i] <= 10^6$
+score 中的所有值 **互不相同**
+
+#### 解题思路
+
+先排序(可以用优先队列排，也可以用HashMap排，也可以手撕快排实现排序)
+
+最后记录每个score对应的名词返回结果
+
+#### 解题代码
+
+```java
+package cn.edu.csust.leetcode;
+
+import java.util.*;
+
+//class Solution{
+//    public String[] findRelativeRanks(int[] score) {
+//        int n = score.length;
+//        int[] sortedScores = Arrays.copyOf(score, n);
+//        Arrays.sort(sortedScores);
+//        String [] ranks = new String[n];
+//        for(int i = 0;i<n;i++){
+//            int low = 0;
+//            int high = score.length - 1;
+//            int mid = 0;
+//            while(low <= high){
+//                mid = ((high - low)>>1) + low;
+//                if(sortedScores[mid] == score[i]){
+//                    break;
+//                }
+//                else if(sortedScores[mid] > score[i]){
+//                    high = mid - 1;
+//                }
+//                else{
+//                    low = mid + 1;
+//                }
+//            }
+//            switch (n - mid){
+//                case 1: ranks[i] = "Gold Medal";break;
+//                case 2: ranks[i] = "Silver Medal";break;
+//                case 3: ranks[i] = "Bronze Medal";break;
+//                default: ranks[i] = (n - mid) + "";break;
+//            }
+//        }
+//        return ranks;
+//    }
+//}
+
+
+//class Solution {
+//    public String[] findRelativeRanks(int[] score) {
+//        int n = score.length;
+//        String [] ranks = new String[n];
+//        int [] sortArr = Arrays.copyOf(score, n);
+//        Arrays.sort(sortArr);
+//        Map<Integer, Integer> map = new HashMap<>();
+//        for (int i = 0; i < n; i++) {
+//            map.put(sortArr[i], n - i);
+//        }
+//        for (int i = 0; i < n; i++) {
+//            switch (map.get(score[i])){
+//                case 1: ranks[i] = "Gold Medal"; break;
+//                case 2: ranks[i] = "Silver Medal"; break;
+//                case 3: ranks[i] = "Bronze Medal"; break;
+//                default: ranks[i] = map.get(score[i]) + "";break;
+//            }
+//
+//        }
+//        return ranks;
+//    }
+//}
+
+// 优先队列
+//class Solution {
+//    public String[] findRelativeRanks(int[] score) {
+//        String[] preThird = { "Gold Medal", "Silver Medal", "Bronze Medal" };
+//        String[] ans = new String[score.length];
+//        Queue<int[]> rank = new PriorityQueue<>((x, y) -> x[1] - y[1]);
+//        for (int i = 0; i < score.length; i++) {
+//            rank.offer(new int[] { i, score[i] });
+//        }
+//        for (int i = ans.length; i > 0; i--) {
+//            int[] r = rank.poll();
+//            ans[r[0]] = i < 4 ? preThird[i - 1] : String.valueOf(i);
+//        }
+//        return ans;
+//    }
+//}
+
+// 快排
+//class Solution {
+//    public String[] findRelativeRanks(int[] score) {
+//        // 尝试对score进行排序, 排序的是索引
+//        // 1.整理新数组
+//        int[][] array = new int[score.length][2];
+//        for (int i = 0; i < score.length; i++) {
+//            array[i][0] = score[i];
+//            array[i][1] = i;
+//        }
+//        // 2.排序
+//        quickSort(array, 0, array.length - 1);
+//        // 3.获取结果
+//        String[] result = new String[score.length];
+//        result[array[0][1]] = "Gold Medal";
+//        if (score.length > 1) {
+//            result[array[1][1]] = "Silver Medal";
+//        }
+//        if (score.length > 2) {
+//            result[array[2][1]] = "Bronze Medal";
+//        }
+//        for (int i = 3; i < array.length; i++) {
+//            result[array[i][1]] = String.valueOf(i + 1);
+//        }
+//        return result;
+//    }
+//
+//    private void quickSort(int[][] array, int left, int right) {
+//        if (left < right) {
+//            int lt = left - 1;
+//            int rt = right + 1;
+//            int curIndex = left;
+//            int[] curValue = array[curIndex];
+//            int[] temp;
+//            while (curIndex < rt) {
+//                if (curValue[0] < array[curIndex][0]) {
+//                    temp = array[++lt];
+//                    array[lt] = array[curIndex];
+//                    array[curIndex++] = temp;
+//                } else if (curValue[0] > array[curIndex][0]) {
+//                    temp = array[--rt];
+//                    array[rt] = array[curIndex];
+//                    array[curIndex] = temp;
+//                } else {
+//                    curIndex++;
+//                }
+//            }
+//            quickSort(array, left, lt);
+//            quickSort(array, rt, right);
+//        }
+//    }
+//}
+
+//public class RelativeRanks {
+//    public static void main(String[] args) {
+//        Solution solution = new Solution();
+//        System.out.println(Arrays.toString(solution.findRelativeRanks(new int []{5, 4, 3, 2, 1})));
+//        System.out.println(Arrays.toString(solution.findRelativeRanks(new int []{10,3,8,9,4})));
+//    }
+//}
+
+```
+
+#### 提交记录
+
+![image-20211202095523603](LeetCode-CookBook(Implement By Java).assets/image-20211202095523603.png)
+
 ### <span id="519">519.RandomFlipMatrix</span>
 
 #### 题目描述
@@ -3652,6 +3843,58 @@ class Solution {
 i是$10^{times}$, times是当前第几次进入循环
 
 #### 解题代码
+
+```
+package cn.edu.csust.leetcode.algorithm.greedy;
+
+
+class Solution{
+    public int monotoneIncreasingDigits(int n) {
+        char[] num = (n + "").toCharArray();
+        int t = num.length - 1;
+        for (int i = t; i > 0; i--) {
+            if(num[i] < num[i-1]){
+                num[i - 1]--;
+                for (int j = i; j <= t; j++) {
+                    num[j] = '9';
+                }
+            }
+        }
+        int sum = 0;
+        for (int i = 0; i <= t; i++) {
+            sum = sum * 10 + (num[i] - '0');
+        }
+        return sum;
+    }
+}
+
+
+class Solution{
+    public int monotoneIncreasingDigits(int N) {
+        int i = 1;
+        int res = N;
+        while(i <= res/10) {
+            int n = res / i % 100; // 每次取两个位
+            i *= 10;
+            if(n/10 > n%10) // 比较的高一位大于底一位
+                res = res / i * i - 1; //例如1332 循环第一次变为1330-1=1329 第二次变为1300-1=1299
+        }
+        return res;
+    }
+}
+public class MonotoneIncreasingDigits {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.monotoneIncreasingDigits(1234));
+        System.out.println(solution.monotoneIncreasingDigits(1032));
+        System.out.println(solution.monotoneIncreasingDigits(332));
+    }
+}
+
+```
+
+
+
 #### 提交记录
 
 ![image-20211201094556200](LeetCode-CookBook(Implement By Java).assets/image-20211201094556200.png)
