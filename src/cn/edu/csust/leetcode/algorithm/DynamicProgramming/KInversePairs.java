@@ -1,4 +1,4 @@
-//package cn.edu.csust.leetcode.DynamicProgramming;
+//package cn.edu.csust.leetcode.algorithm.DynamicProgramming;
 //// dp(n, k+1) = dp(n - 1, k + 1) + dp(n, k) - dp(n - 1, k - n + 1)
 //class Solution {
 //    public int kInversePairs(int n, int k) {

@@ -53,6 +53,12 @@
 * **[2021.12.01-easy:1446.连续字符](#1446)**
 * **[2021.12.01-easy:738.单调递增的数字](#738)**
 * **[2021.12.02-easy:506.相对名次](#506)**
+* **[2021.12.12-easy:709.转成小写字母](#709)**
+* **[2021.12.12-easy:53.最大子数组和](#53)**
+* **[2021.12.13-mid:807.保持城市天际线](#807)**
+* **[2021.12.13-easy: 55.跳跃游戏](#55)**
+* **[2021.12.13-mid: 45.跳跃游戏](#45)**
+* **[2021.12.14-difficult:630.courseSchedule](#630)**
 
 ## 二、刷题 分类表
 
@@ -150,13 +156,17 @@ graph LR
 
 
 
-| 刷题时间   | 题目                         | 难度 | 思路        | 链接                                                         |
-| ---------- | ---------------------------- | ---- | ----------- | ------------------------------------------------------------ |
-| 2021.11.27 | 455.分发饼干                 | easy | [go](#455)  | [455.分发饼干](https://leetcode-cn.com/problems/assign-cookies/) |
-| 2021.11.27 | 1005.k次取反后最大化的数组和 | easy | [go](#1005) | [1005.K次取反后最大化的数组和](https://leetcode-cn.com/problems/maximize-sum-of-array-after-k-negations) |
-| 2021.11.27 | 860.柠檬水找零               | easy | [go](#860)  | [860.柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/) |
-| 2021.11.28 | 376.摆动序列问题             | mid  | [go](#376)  | [376.摆动序列问题](https://leetcode-cn.com/problems/wiggle-subsequence) |
-| 2021.12.01 | 738.单调递增的数字           | mid  | [go](#768)  | [738.单调递增的数字](https://leetcode-cn.com/problems/monotone-increasing-digits) |
+| 刷题时间   | 题目                         | 难度      | 思路        | 链接                                                         |
+| ---------- | ---------------------------- | --------- | ----------- | ------------------------------------------------------------ |
+| 2021.11.27 | 455.分发饼干                 | easy      | [go](#455)  | [455.分发饼干](https://leetcode-cn.com/problems/assign-cookies/) |
+| 2021.11.27 | 1005.k次取反后最大化的数组和 | easy      | [go](#1005) | [1005.K次取反后最大化的数组和](https://leetcode-cn.com/problems/maximize-sum-of-array-after-k-negations) |
+| 2021.11.27 | 860.柠檬水找零               | easy      | [go](#860)  | [860.柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/) |
+| 2021.11.28 | 376.摆动序列问题             | mid       | [go](#376)  | [376.摆动序列问题](https://leetcode-cn.com/problems/wiggle-subsequence) |
+| 2021.12.01 | 738.单调递增的数字           | mid       | [go](#768)  | [738.单调递增的数字](https://leetcode-cn.com/problems/monotone-increasing-digits) |
+| 2021.12.12 | 53.最大子数组                | easy      | [go](#53)   | [53.最大子数组](https://leetcode-cn.com/problems/maximum-subarray) |
+| 2021.12.13 | 45.跳跃游戏Ⅱ                 | mid       | [go](#45)   | [45.跳跃游戏Ⅱ](https://leetcode-cn.com/problems/jump-game-ii/) |
+| 2021.12.13 | 55.跳跃游戏                  | easy      | [go](#55)   | [55.跳跃游戏](https://leetcode-cn.com/problems/jump-game/)   |
+| 2021.12.14 | 630.课程安排3                | difficult | [go](#630)  | [630.课程安排3](https://leetcode-cn.com/problems/course-schedule-iii) |
 
 ####  1.2. 双指针
 
@@ -166,6 +176,7 @@ graph LR
 | ---------- | ------------------------------------ | ---- | ----------- | ------------------------------------------------------------ |
 | 2021.11.28 | 438.找到字符串中那个所有字母的异位词 | easy | [go](#455)  | [438. 找到字符串中所有字母异位词](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/) |
 | 2021.12.01 | 1446.连续字符                        | easy | [go](#1446) | [1446.连续字符](https://leetcode-cn.com/problems/consecutive-characters/) |
+|            |                                      |      |             |                                                              |
 
 ##### 1.2.2.快慢指针
 
@@ -206,6 +217,248 @@ graph LR
 #### 3.6. 中位数
 
 ## 三、逐题题解
+
+### <span id="45">45.跳跃游戏2</span>
+#### 题目描述
+
+给你一个非负整数数组 nums ，你最初位于数组的第一个位置。
+
+数组中的每个元素代表你在该位置可以跳跃的最大长度。
+
+你的目标是使用最少的跳跃次数到达数组的最后一个位置。
+
+假设你总是可以到达数组的最后一个位置。
+
+**示例 1:**
+
+```
+输入: nums = [2,3,1,1,4]
+输出: 2
+解释: 跳到最后一个位置的最小跳跃数是 2。
+     从下标为 0 跳到下标为 1 的位置，跳 1 步，然后跳 3 步到达数组的最后一个位置。
+
+```
+
+**示例 2:**
+
+```
+输入: nums = [2,3,0,1,4]
+输出: 2
+```
+
+
+
+**提示:**
+
+$1 \le nums.length \le 10^4$
+$0 \le nums[i] \le 1000$
+
+#### 解题思路
+
+1.贪心，从起点开始走，走到currentDist的过程中出现的最远的nums[i] + i作为nextDist,如果当前i等于currentDist,那么currentDist 被赋值为nextDist, 且step++
+
+#### 解题代码
+
+```java
+class Solution {
+    public int jump(int[] nums){
+        int currentNext = nums[0];
+        int currentDist = nums[0];
+        int step = 1;
+        if(nums.length == 1){
+            return 0;
+        }
+        for (int i = 0; i < nums.length - 1; i++) {
+            currentNext = Math.max(currentNext, nums[i] + i);
+            if(i == currentDist){
+                currentDist = currentNext;
+                step++;
+            }
+            
+        }
+        return step;
+    }
+}
+```
+
+
+
+#### 提交记录
+
+![image-20211213094012954](LeetCode-CookBook(Implement By Java).assets/image-20211213094012954.png)
+
+### <span id="53">53.最大子数组和</span>
+
+#### 题目描述
+
+给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+
+子数组 是数组中的一个连续部分。
+
+ **示例 1：**
+
+```
+输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
+输出：6
+解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
+```
+
+
+**示例 2：**
+
+```
+输入：nums = [1]
+输出：1
+```
+
+**示例 3：**
+
+```
+输入：nums = [5,4,-1,7,8]
+输出：23
+```
+
+**提示：**
+
+$1 <= nums.length <= 10^5$
+$-10^4 <= nums[i] <= 10^4$
+
+
+进阶：如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的 分治法 求解。
+
+#### 解题思路
+
+模拟。逐个相加，如果结果大于已有的结果，则将现有结果赋值给已有的最大值，否则判断当前结果是否小于0，如果小于0，则将记录变量置0，重新开始计算。
+
+#### 解题代码
+
+```java
+//
+//////比较慢
+////class Solution{
+////    // 动态规划:状态转移方程dp[i] = nums[i] + dp[i - 1] (dp[i - 1] >= 0)
+////    //                  dp[i] = nums[i] (dp[i - 1] <= 0)
+////    public int maxSubArray(int [] nums){
+////        int len = nums.length;
+////        int [] dp = new int[len];
+////        int res = nums[0];
+////        dp[0] = nums[0];
+////        for (int i = 1; i < len; i++) {
+////            if(dp[i - 1] > 0){
+////                dp[i] = dp[i - 1 ] + nums[i];
+////            }
+////            else{
+////                dp[i] = nums[i];
+////            }
+////            res = dp[i] > res?dp[i] : res;
+////        }
+////        return res;
+////    }
+////}
+//
+//// 模拟方法击败90%
+//class Solution{
+//    public int maxSubArray(int [] nums){
+//        int len = nums.length;
+//        if(len == 1){
+//            return nums[0];
+//        }
+//        int maxSum = nums[0], res = 0, p = 0;
+//        while(p < len){
+//            res += nums[p];
+//            maxSum = res > maxSum ? res: maxSum;
+//            res = res < 0 ?0:res;
+//            p++;
+//        }
+//        return maxSum;
+//    }
+//}
+//public class MaximumSubarray {
+//    public static void main(String[] args) {
+//        Solution solution = new Solution();
+//        System.out.println(
+//                solution.maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4})
+//        );
+//    }
+//}
+```
+
+#### 提交记录
+
+![image-20211212203224060](LeetCode-CookBook(Implement By Java).assets/image-20211212203224060.png)
+
+### <span id="55">55.跳跃游戏Ⅰ</span>
+#### 题目描述
+
+给定一个非负整数数组 nums ，你最初位于数组的 第一个下标 。
+
+数组中的每个元素代表你在该位置可以跳跃的最大长度。
+
+判断你是否能够到达最后一个下标。
+
+ 
+
+**示例 1：**
+
+```
+输入：nums = [2,3,1,1,4]
+输出：true
+解释：可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步到达最后一个下标。
+```
+
+**示例 2：**
+
+```
+输入：nums = [3,2,1,0,4]
+输出：false
+解释：无论怎样，总会到达下标为 3 的位置。但该下标的最大跳跃长度是 0 ， 所以永远不可能到达最后一个下标。
+```
+
+
+**提示：**
+
+$1 \le nums.length \le 3 * 10^4
+$0 \le nums[i] \le 10^5$
+
+#### 解题思路
+
+1.从假设就开始贪心，假设能够跳到终点，那么就要看最终调到终点中间的步数需要满足的最小值step，如果nums[i] >= step那么说明能够进行一跳
+
+2.如果不满足则step++,意思就是从当前步调到上一个步骤的起点需要的最小steps,一直到起点，如果起点处步数不小于当前step需要的最小步数，那么能够跳跃成功到达终点，否则不能调到终点
+
+3.返回最终的模拟结果
+
+#### 解题代码
+
+```java
+class Solution{
+    public boolean canJump(int[] nums){
+        int step = 1;
+        if(nums.length == 0)
+            return true;
+        for (int i = nums.length - 2; i >= 0 ; i--) {
+            if(nums[i] >= step){
+                step = 1;
+            }
+            else{
+                step++;
+            }
+
+        }
+        return step <= 1 && nums[0] >= 1;
+    }
+}
+public class JustForTest {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.canJump(new int[]{3, 2, 1, 0, 4}));
+    }
+}
+```
+
+#### 提交记录
+
+![image-20211213091535415](LeetCode-CookBook(Implement By Java).assets/image-20211213091535415.png)
 
 ### <span id="237">237.删除链表中的节点 easy</span>
 
@@ -259,7 +512,7 @@ graph LR
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode;
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -430,7 +683,7 @@ nums 中的所有数字都 独一无二
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode.Array;
+
 
 import java.util.Arrays;
 
@@ -643,7 +896,7 @@ Output: [""]
 ##### code
 
 ```java
-package cn.edu.csust.leetcode.stack;
+
 
 import java.util.*;
 // DFS
@@ -812,7 +1065,7 @@ b对应整数的倒数第二位, 依次类推. 时间复杂度O(N^2)
 #### 题解
 
 ```java
-package cn.edu.csust.leetcode;
+
 
 class Solution {
     public int maxProduct(String[] words) {
@@ -896,7 +1149,7 @@ $0 <= n <= 10^9$
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode;
+
 //// 暴力和面向测试编程
 //class Solution {
 //    public int bulbSwitch(int n) {
@@ -1031,7 +1284,7 @@ public class BulbSwitcher {
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode;
+
 class Solution{
     public boolean isSelfCrossing(int[] distance) {
         int len = distance.length;
@@ -1097,7 +1350,7 @@ $1 <= num <= 2^{31} - 1$
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode;
+
 class Solution{
     public boolean isPerfectSquare(int num){
         int end = 1 << 16;
@@ -1398,7 +1651,7 @@ public int[] shuffle() {
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode.Array;
+
 
 import java.util.Arrays;
 import java.util.Random;
@@ -1496,7 +1749,7 @@ $-10^5 <= xi, yi, ai, bi <= 10^5$
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -1768,7 +2021,7 @@ $1 <= n <= 2^{31} - 1$
 #### 解题代码
 
 ```
-//package cn.edu.csust.leetcode;
+//
 //// 比较有意思，这个提的思路大致都懂，但是需要做到时间最优需要技巧，例如剪枝
 //class Solution {
 //    public int findNthDigit(int n) {
@@ -2390,7 +2643,7 @@ board 和 hand 由字符 'R'、'Y'、'B'、'G' 和 'W' 组成
 #### 代码:
 
 ```java
-package cn.edu.csust.leetcode;
+
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -2643,7 +2896,7 @@ score 中的所有值 **互不相同**
 #### 解题代码
 
 ```java
-package cn.edu.csust.leetcode;
+
 
 import java.util.*;
 
@@ -2919,7 +3172,7 @@ word 由小写和大写英文字母组成。
 挨个判断
 
 ```java
-package cn.edu.csust.leetcode.Array;
+
 
 class Solution {
     public boolean detectCapitalUse(String word) {
@@ -2985,7 +3238,7 @@ public class DetectCapital {
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode.BinaryTree;
+package cn.edu.csust.leetcode.algorithm.BinaryTree;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -3280,7 +3533,7 @@ $-10^{9} <= nums[i] <= 10^{9}$
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode.Array;
+
 
 import java.util.Arrays;
 import java.util.Map;
@@ -3501,7 +3754,7 @@ class Solution {
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode.DynamicProgramming;
+package cn.edu.csust.leetcode.algorithm.DynamicProgramming;
 // dp(n, k+1) = dp(n - 1, k + 1) + dp(n, k) - dp(n - 1, k - n + 1)
 class Solution {
     public int kInversePairs(int n, int k) {
@@ -3536,6 +3789,101 @@ public class KInversePairs {
     }
 }
 ```
+
+### <span id="630">630.课程安排</span>
+#### 题目描述
+
+这里有 n 门不同的在线课程，按从 1 到 n 编号。给你一个数组 courses ，其中 courses[i] = [durationi, lastDayi] 表示第 i 门课将会 持续 上 durationi 天课，并且必须在不晚于 lastDayi 的时候完成。
+
+你的学期从第 1 天开始。且不能同时修读两门及两门以上的课程。
+
+返回你最多可以修读的课程数目。
+
+ **示例 1：**
+
+```
+输入：courses = [[100, 200], [200, 1300], [1000, 1250], [2000, 3200]]
+输出：3
+解释：
+这里一共有 4 门课程，但是你最多可以修 3 门：
+首先，修第 1 门课，耗费 100 天，在第 100 天完成，在第 101 天开始下门课。
+第二，修第 3 门课，耗费 1000 天，在第 1100 天完成，在第 1101 天开始下门课程。
+第三，修第 2 门课，耗时 200 天，在第 1300 天完成。
+第 4 门课现在不能修，因为将会在第 3300 天完成它，这已经超出了关闭日期。
+```
+
+**示例 2：**
+
+```
+输入：courses = [[1,2]]
+输出：1
+```
+
+**示例 3：**
+
+```
+输入：courses = [[3,2],[4,3]]
+输出：0
+```
+
+**提示:**
+
+$1 <= courses.length <= 10^4$
+$1 <= durationi, lastDayi <= 10^4$
+
+#### 解题思路
+#### 解题代码
+
+```java
+//贪心算法
+// backpack[i-1][j] + backpack[i][j-1]
+class  Solution{
+    public int scheduleCourse(int [][] courses){
+//        将课程排序：按照截止日期升序再按学习时间升序，尽可能把快要截止的课程先学了，在此基础上哪个学得快学哪个
+        Arrays.sort(courses,(o1, o2)->o1[1] == o2[1]?o1[0] - o2[0]:o1[1] - o2[1]);
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((o1, o2)->o2-o1);
+//        已经学习了多少天了
+        int lastDeadline = 0;
+//        已经学了多少门课了
+        int count = 0;
+
+//
+        for (int i = 0; i < courses.length; i++) {
+//            如果需要学习的时间超过了截止日期
+            if(courses[i][0] > courses[i][1]) {
+                continue;
+            }
+//
+            if(courses[i][0] + lastDeadline <= courses[i][1]){
+                count++;
+                lastDeadline = courses[i][0] + lastDeadline;
+                priorityQueue.add(courses[i][0]);
+            }
+            else{
+                if(!priorityQueue.isEmpty()){
+                    //如果优先队列不为空,说明我们之前学习了一些课,那么这门课的学习与否还有操作的余地
+                    int temp = lastDeadline - priorityQueue.peek() + courses[i][0];
+                    //通过peek()得到之前学习课程中最大的花费代价,将那门课换成当前的课
+                    if(temp < courses[i][1] && lastDeadline > temp){//能够学习,要么就是1换1,要么就是不学
+//                        虽然课程数量count没有变,但是我们可以选择最有方案让累计天数尽可能小
+                        
+                            lastDeadline = temp;
+                            priorityQueue.poll();
+                            priorityQueue.add(courses[i][0]);
+                        
+                    }
+                }
+            }
+
+        }
+        return count;
+    }
+}
+```
+
+
+
+#### 提交记录
 
 ### <span id="677">677. Map Sum Pairs</span>
 
@@ -3583,7 +3931,7 @@ mapSum.sum("ap");           // return 5 (apple + app = 3 + 2 = 5)
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode;
+
 
 import sun.text.normalizer.Trie;
 
@@ -3804,7 +4152,78 @@ class Solution {
 
 
 
+### <span>709.转成小写字母</span>
+
+#### 题目描述
+
+给你一个字符串 s ，将该字符串中的大写字母转换成相同的小写字母，返回新的字符串。
+
+**示例 1：**
+
+```
+输入：s = "Hello"
+输出："hello"
+```
+
+**示例 2：**
+
+```
+输入：s = "here"
+输出："here"
+```
+
+**示例 3：**
+
+```
+输入：s = "LOVELY"
+输出："lovely"
+```
+
+**提示：**
+
+1 <= s.length <= 100
+s 由 ASCII 字符集中的可打印字符组成
+
+#### 解题思路
+
+顺序遍历使用Character类将大写字母转成小写字母，用StringBuilder来进行字符串拼接
+
+时空效率都高
+
+#### 解题代码
+
+```java
+
+
+import java.util.Arrays;
+//时间100%，空间95%
+class Solution{
+    public String toLowerCase(String str){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i =0;i<str.length();i++){
+            stringBuilder.append(Character.toLowerCase(str.charAt(i)));
+
+        }
+        return stringBuilder.toString();
+    }
+}
+public class ToLowerCase {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.toLowerCase("Hello"));
+    }
+}
+
+```
+
+
+
+#### 提交记录
+
+![image-20211212195300791](LeetCode-CookBook(Implement By Java).assets/image-20211212195300791.png)
+
 ### <span id="738">738.单调的数字</span>
+
 #### 题目描述
 
 给定一个非负整数 N，找出小于或等于 N 的最大的整数，同时这个整数需要满足其各个位数上的数字是单调递增。
@@ -3899,6 +4318,98 @@ public class MonotoneIncreasingDigits {
 
 ![image-20211201094556200](LeetCode-CookBook(Implement By Java).assets/image-20211201094556200.png)
 
+### <span id="807">807.保持城市天际线</span>
+#### 题目描述
+
+在二维数组grid中，grid[i][j]代表位于某处的建筑物的高度。 我们被允许增加任何数量（不同建筑物的数量可能不同）的建筑物的高度。 高度 0 也被认为是建筑物。
+
+最后，从新数组的所有四个方向（即顶部，底部，左侧和右侧）观看的“天际线”必须与原始数组的天际线相同。 城市的天际线是从远处观看时，由所有建筑物形成的矩形的外部轮廓。 请看下面的例子。
+
+建筑物高度可以增加的最大总和是多少？
+
+```
+例子：
+输入： grid = [[3,0,8,4],[2,4,5,7],[9,2,6,3],[0,3,1,0]]
+输出： 35
+解释： 
+The grid is:
+[ [3, 0, 8, 4], 
+  [2, 4, 5, 7],
+  [9, 2, 6, 3],
+  [0, 3, 1, 0] ]
+
+从数组竖直方向（即顶部，底部）看“天际线”是：[9, 4, 8, 7]
+从水平水平方向（即左侧，右侧）看“天际线”是：[8, 7, 9, 3]
+
+在不影响天际线的情况下对建筑物进行增高后，新数组如下：
+
+gridNew = [ [8, 4, 8, 7],
+            [7, 4, 7, 7],
+            [9, 4, 8, 7],
+            [3, 3, 3, 3] ]
+```
+
+说明:
+
+1 < grid.length = grid[0].length <= 50。
+$ grid[i][j] 的高度范围是： [0, 100]。$
+一座建筑物占据一个$grid[i][j]$：换言之，它们是$ 1 \times 1 \times grid[i][j] $的长方体。
+
+#### 解题思路
+
+1.首先暴力找到每行每列的最大值，
+
+2.每个格子增加的高度为:min(rowMax[i], colMax[j]) - grid[i][j]
+
+3.累加求和返回
+
+#### 解题代码
+
+```java
+class Solution{
+    public int maxIncreaseKeepingSkyline(int[][] grid) {
+        int sum = 0;
+        int row = grid.length;
+        int col = grid[0].length;
+
+        int [] rowMax = new int[row];
+        int [] colMax = new int[col];
+
+        for (int i = 0; i < row; i++) {
+            rowMax[i] = grid[i][0];
+        }
+
+        for (int i = 0; i < col; i++) {
+            colMax[i] = grid[0][i];
+        }
+
+        for (int i = 0;i < row;i++) {
+            for (int j = 0;j < col;j++) {
+                if(grid[i][j] > rowMax[i]){
+                    rowMax[i] = grid[i][j];
+                }
+                if(grid[i][j] > colMax[j]){
+                    colMax[j] = grid[i][j];
+                }
+
+            }
+        }
+        for (int i = 0;i < row;i++) {
+            for (int j = 0;j < col;j++) {
+                sum += Math.min(rowMax[i], colMax[j]) - grid[i][j];
+            }
+        }
+        return sum;
+    }
+}
+```
+
+
+
+#### 提交记录
+
+![image-20211213085505821](LeetCode-CookBook(Implement By Java).assets/image-20211213085505821.png)
+
 ### <span id="859">859.亲密字符串</span>
 
 #### 题目描述
@@ -3949,7 +4460,7 @@ $s 和 goal 由小写英文字母组成$
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode.Array;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -4475,7 +4986,7 @@ class Solution3{
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode;
+
 
 import java.util.HashMap;
 import java.util.Map;

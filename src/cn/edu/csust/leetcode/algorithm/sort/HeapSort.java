@@ -1,4 +1,4 @@
-//package cn.edu.csust.leetcode.sort;
+//package cn.edu.csust.leetcode.algorithm.sort;
 ///**
 // * 堆排序: Java
 // *

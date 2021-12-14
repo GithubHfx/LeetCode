@@ -1,4 +1,4 @@
-//package cn.edu.csust.leetcode.BinaryTree;
+//package cn.edu.csust.leetcode.algorithm.BinaryTree;
 //
 //import java.util.ArrayList;
 //import java.util.Collections;

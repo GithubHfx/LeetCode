@@ -1,4 +1,4 @@
-//package cn.edu.csust.leetcode.BinaryTree;
+//package cn.edu.csust.leetcode.algorithm.BinaryTree;
 //class TreeNode {
 //    int val;
 //    TreeNode left;

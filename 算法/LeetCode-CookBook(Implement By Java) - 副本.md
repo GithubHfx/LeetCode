@@ -461,36 +461,39 @@ Output: [""]
 ##### code
 
 ```java
-package cn.edu.csust.leetcode.stack;
+package cn.edu.csust.leetcode.data_structure.stack;
 
 import java.util.*;
+
 // DFS
 //1.这个题可以用堆栈，
 // 但是由于只有小括号，
 // 所以堆栈有点多余，
 // 直接用一个统计变量统计是否有不匹配的左右括号即可
 class Solution {
-//    检测右括号检测是否多余
+    //    检测右括号检测是否多余
     char[] pair = new char[]{'(', ')'};
     char[] rePair = new char[]{')', '('};
+
     public List<String> removeInvalidParentheses(String s) {
         List<String> result = new ArrayList<>();
         removeHelper(s, result, 0, 0, pair);
         return result;
     }
-    private void removeHelper(String s, List<String> result, int lastI, int lastJ, char [] pa){
+
+    private void removeHelper(String s, List<String> result, int lastI, int lastJ, char[] pa) {
 //        count用于记录有多少个不合法括号，count>0,左括号不合法，count < 0右括号不合法
         int count = 0;
         for (int i = lastI; i < s.length(); i++) {
-            if(s.charAt(i) == pa[0]){
+            if (s.charAt(i) == pa[0]) {
                 count++;
             }
-            if(s.charAt(i) == pa[1]){
+            if (s.charAt(i) == pa[1]) {
                 count--;
             }
-            if(count<0){
+            if (count < 0) {
                 for (int j = lastJ; j <= i; j++) {
-                    if(s.charAt(j) == pa[1] && (j == lastJ||s.charAt(j - 1) != pa[1])){
+                    if (s.charAt(j) == pa[1] && (j == lastJ || s.charAt(j - 1) != pa[1])) {
                         String newStr = s.substring(0, j) + s.substring(j + 1);
                         removeHelper(newStr, result, i, j, pa);
                     }
@@ -501,14 +504,14 @@ class Solution {
         StringBuilder stringBuilder = new StringBuilder(s);
         stringBuilder.reverse();
         s = stringBuilder.toString();
-        if(pa[0] == '('){
+        if (pa[0] == '(') {
             removeHelper(s, result, 0, 0, rePair);
-        }
-        else{
+        } else {
             result.add(s);
         }
     }
 }
+
 // 测试类
 public class RemoveInvalidParentheses {
     public static void main(String[] args) {
@@ -1942,33 +1945,35 @@ class Solution {
 #### 代码
 
 ```java
-package cn.edu.csust.leetcode.DynamicProgramming;
+package cn.edu.csust.leetcode.algorithm.DynamicProgramming;
+
 // dp(n, k+1) = dp(n - 1, k + 1) + dp(n, k) - dp(n - 1, k - n + 1)
 class Solution {
     public int kInversePairs(int n, int k) {
-        if(k > n * (n - 1) / 2){
+        if (k > n * (n - 1) / 2) {
             return 0;
         }
-        if(k == 0 || k == n * (n - 1) / 2){
+        if (k == 0 || k == n * (n - 1) / 2) {
             return 1;
         }
         int mod = 1000000007;
-        long [][] dp = new long[n + 1][k + 1];
+        long[][] dp = new long[n + 1][k + 1];
         dp[2][0] = 1;
         dp[2][1] = 1;
         for (int i = 3; i <= n; i++) {
             dp[i][0] = 1;
-            for (int j = 1; j < Math.min(k, n * (n - 1)/2); j++) {
+            for (int j = 1; j < Math.min(k, n * (n - 1) / 2); j++) {
                 dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-                if(j >= i){
+                if (j >= i) {
                     dp[i][j] -= dp[i][j - i];
                 }
                 dp[i][j] = (dp[i][j] + mod) % mod; //处理dp[i][j]为负数的情况
             }
         }
-        return (int)dp[n][k];
+        return (int) dp[n][k];
     }
 }
+
 public class KInversePairs {
     public static void main(String[] args) {
         Solution solution = new Solution();

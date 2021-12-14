@@ -1,4 +1,4 @@
-//package cn.edu.csust.leetcode.DynamicProgramming;
+//package cn.edu.csust.leetcode.algorithm.DynamicProgramming;
 //class Solution {
 //    public int getMoneyAmount(int n) {
 //        int [][] dp = new int [n + 1][n + 1];

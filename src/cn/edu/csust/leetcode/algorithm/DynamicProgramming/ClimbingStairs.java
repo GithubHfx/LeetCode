@@ -1,4 +1,4 @@
-//package cn.edu.csust.leetcode.DynamicProgramming;
+//package cn.edu.csust.leetcode.algorithm.DynamicProgramming;
 //// 递归方式超级慢
 ////class Solution{
 ////    public int climbStairs(int n) {

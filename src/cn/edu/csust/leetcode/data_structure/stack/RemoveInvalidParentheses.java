@@ -1,4 +1,4 @@
-//package cn.edu.csust.leetcode.stack;
+//package cn.edu.csust.leetcode.data_structure.stack;
 
 import java.util.ArrayList;
 import java.util.List;
