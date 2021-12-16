@@ -59,6 +59,7 @@
 * **[2021.12.13-easy: 55.跳跃游戏](#55)**
 * **[2021.12.13-mid: 45.跳跃游戏](#45)**
 * **[2021.12.14-difficult:630.courseSchedule](#630)**
+* **[2021.12.16-mid:452.用最小数量的箭引爆气球](#452)**
 
 ## 二、刷题 分类表
 
@@ -2413,6 +2414,93 @@ public class FindAllAnagramsInAString {
 #### 提交记录
 
 ![image-20211128101731653](E:\LeetCode\LeetCode-CookBook(Implement By Java).assets\image-20211128101731653.png)
+
+### <span id="452">452.用最少数量的箭引爆气球</span>
+#### 题目描述
+
+在二维空间中有许多球形的气球。对于每个气球，提供的输入是水平方向上，气球直径的开始和结束坐标。由于它是水平的，所以纵坐标并不重要，因此只要知道开始和结束的横坐标就足够了。开始坐标总是小于结束坐标。
+
+一支弓箭可以沿着 x 轴从不同点完全垂直地射出。在坐标 x 处射出一支箭，若有一个气球的直径的开始和结束坐标为 xstart，xend， 且满足  xstart ≤ x ≤ xend，则该气球会被引爆。可以射出的弓箭的数量没有限制。 弓箭一旦被射出之后，可以无限地前进。我们想找到使得所有气球全部被引爆，所需的弓箭的最小数量。
+
+给你一个数组 points ，其中 points [i] = [xstart,xend] ，返回引爆所有气球所必须射出的最小弓箭数。
+
+**示例 1：**
+
+```
+输入：points = [[10,16],[2,8],[1,6],[7,12]]
+输出：2
+解释：对于该样例，x = 6 可以射爆 [2,8],[1,6] 两个气球，以及 x = 11 射爆另外两个气球
+```
+
+**示例 2：**
+
+```
+输入：points = [[1,2],[3,4],[5,6],[7,8]]
+输出：4
+```
+
+**示例 3：**
+
+```
+输入：points = [[1,2],[2,3],[3,4],[4,5]]
+输出：2
+```
+
+**示例 4：**
+
+```
+输入：points = [[1,2]]
+输出：1
+```
+
+**示例 5：**
+
+```
+输入：points = [[2,3],[2,3]]
+输出：1
+```
+
+**提示：**
+
+$1 <= points.length <= 10^4$
+$points[i].length == 2$
+$-2^{31} <= xstart < xend <= 2^{31} - 1$
+
+#### 解题思路
+
+1.首先对整个数组排序
+
+2.合并区间，如果没有合并成功那么就说明射出去的箭不能引爆气球，需要额外增加一个
+
+#### 解题代码
+
+```java
+class Solution {
+    public int findMinArrowShots(int[][] points) {
+        Arrays.sort(points,(o1,o2)->Integer.compare(o1[0],o2[0]));
+        int count = 0;
+        int index = 0;
+        while(index<points.length){
+            int left = points[index][0];
+            int rightMin = points[index][1];
+            while(index<points.length&&points[index][0]<=rightMin){
+                index++;
+                if(index<points.length){
+                    rightMin = Math.min(rightMin,points[index][1]);
+                }
+            }
+            count++;
+        }
+        return count;
+    }
+}
+```
+
+
+
+#### 提交记录
+
+![image-20211216215542388](LeetCode-CookBook(Implement By Java).assets/image-20211216215542388.png)
 
 ### <span id="455">455.分发饼干</span>
 
